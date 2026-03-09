@@ -38,38 +38,10 @@ const PRODUTOS_INICIAIS = [
     ],
     tag: "Premium" 
   },
-  { 
-    id: 4, nome: "Pinceladas Noturnas", preco: 780.00, estoque: 8, 
-    imagem: "https://images.unsplash.com/photo-1578301978693-85fa9c03fa75?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", 
-    imagens: [
-      "https://images.unsplash.com/photo-1578301978693-85fa9c03fa75?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1579762715459-5a068c289fda?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    ],
-    tag: "" 
-  },
-  { 
-    id: 5, nome: "Botânica em Aquarela", preco: 450.00, estoque: 15, 
-    imagem: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", 
-    imagens: [
-      "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1490204732731-e4078513511b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    ],
-    tag: "Novo" 
-  },
-  { 
-    id: 6, nome: "Oceano Profundo", preco: 950.00, estoque: 3, 
-    imagem: "https://images.unsplash.com/photo-1518998053401-b2643194a2cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", 
-    imagens: [
-      "https://images.unsplash.com/photo-1518998053401-b2643194a2cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    ],
-    tag: "Exclusivo" 
-  },
-  { 
-    id: 7, nome: "Aurora de Cobre", preco: 1050.00, estoque: 4, 
-    imagem: "https://images.unsplash.com/photo-1508898578281-774ac4893c0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", 
-    tag: "Destaque" 
-  }
+  
+  
+  
+  
 ];
 
 const DEPOIMENTOS = [
@@ -594,7 +566,7 @@ const Footer = ({ setModoVisualizacao, abrirSobreMim }) => (
       </div>
     </div>
     <div className="lp-container footer-bottom">
-      <p>direitos reservados MarcosSoftwareEngineering_ | <a href="https://www.marvinsitbilders.com/" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'underline'}}>https://www.marvinsitbilders.com/</a></p>
+      <p>@Direitos reservados MarcosSoftwareEngineering_ | <a href="https://www.marvinsitbilders.com/" target="_blank" rel="noreferrer" style={{color: 'inherit', textDecoration: 'underline'}}>https://www.marvinsitbilders.com/</a></p>
       <button className="admin-btn-link" onClick={() => setModoVisualizacao('admin')}>
         <Settings size={14} /> Área do Administrador
       </button>
