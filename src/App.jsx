@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 
 // ==========================================
-// MOCK DATA INICIAL (7 QUADROS)
+// MOCK DATA INICIAL
 // ==========================================
 const PRODUTOS_INICIAIS = [
   { 
@@ -37,11 +37,7 @@ const PRODUTOS_INICIAIS = [
       "https://images.unsplash.com/photo-1600607688969-a5bfcd64bd40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
     ],
     tag: "Premium" 
-  },
-  
-  
-  
-  
+  }
 ];
 
 const DEPOIMENTOS = [
@@ -115,7 +111,6 @@ const AdminLogin = ({ onLogin, onCancel }) => {
     </div>
   );
 };
-
 
 // ==========================================
 // COMPONENTE: ÁREA DO ADMINISTRADOR
@@ -460,13 +455,20 @@ const ProductGallery = ({ produtos, adicionarAoCarrinho }) => {
   );
 };
 
+// COMPONENTE OTIMIZADO DE DEPOIMENTOS
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false); // ESTADO PARA PAUSAR ANIMAÇÃO
 
   useEffect(() => {
-    const interval = setInterval(() => { setCurrentIndex((prevIndex) => (prevIndex + 1) % DEPOIMENTOS.length); }, 3000);
+    if (isHovered) return; // Pausa o loop se o mouse estiver em cima
+    
+    const interval = setInterval(() => { 
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % DEPOIMENTOS.length); 
+    }, 4000); // 4 segundos
+    
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered]);
 
   const nextTestimonial = () => setCurrentIndex((prevIndex) => (prevIndex + 1) % DEPOIMENTOS.length);
   const prevTestimonial = () => setCurrentIndex((prevIndex) => (prevIndex === 0 ? DEPOIMENTOS.length - 1 : prevIndex - 1));
@@ -484,7 +486,12 @@ const Testimonials = () => {
             <p>Classificação <strong>4.9/5</strong> baseada em +500 clientes.</p>
           </div>
         </div>
-        <div className="carousel-wrapper testimonial-carousel-container">
+        
+        <div 
+          className="carousel-wrapper testimonial-carousel-container"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           <button className="carousel-btn prev-btn force-flex desk-only" onClick={prevTestimonial}><ChevronLeft size={24} /></button>
           <div className="testimonial-single-wrapper">
             <div className="testimonial-card glow-wrapper">
@@ -576,7 +583,7 @@ const Footer = ({ setModoVisualizacao, abrirSobreMim }) => (
 
 export default function LandingPageQuadros() {
   const [modoVisualizacao, setModoVisualizacao] = useState('loja'); 
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false); // NOVO ESTADO DE AUTH
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false); 
 
   const [produtos, setProdutos] = useState(() => {
     const produtosSalvos = localStorage.getItem('lumina_produtos');
@@ -757,7 +764,7 @@ export default function LandingPageQuadros() {
       )}
 
       {/* ========================================================================= */}
-      {/* CSS GLOBAL RESPONSIVO DO PROJETO                                          */}
+      {/* CSS GLOBAL RESPONSIVO DO PROJETO - OTIMIZADO                              */}
       {/* ========================================================================= */}
       <style dangerouslySetInnerHTML={{__html: `
         /* 1. RESET E VARIÁVEIS BASE */
@@ -844,14 +851,27 @@ export default function LandingPageQuadros() {
         .video-modal-content { width: 100%; max-width: 1000px; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); display: flex; }
         .real-video-player { width: 100%; height: 100%; object-fit: cover; outline: none; }
 
-        /* OFERTA COM GLOW BORDER */
+        /* OFERTA COM GLOW BORDER - OTIMIZADO PARA NÃO CAUSAR LOOP DE GPU */
         .offer-section { padding: clamp(40px, 6vw, 60px) 0; background: var(--beige-bg); }
-        .glow-wrapper { position: relative; padding: 1.5px; border-radius: 18px; z-index: 1; display: flex; flex-direction: column; width: 100%; }
+        .glow-wrapper { position: relative; padding: 2px; border-radius: 18px; z-index: 1; display: flex; flex-direction: column; width: 100%; transition: transform 0.3s ease; }
         .offer-card-margin { margin: 10px auto; max-width: 1000px; }
-        .glow-wrapper::before, .glow-wrapper::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 18px; background: linear-gradient(90deg, var(--terracota), #df57df, #e1c070, var(--terracota)); background-size: 300% 300%; animation: moverCoresGradient 6s linear infinite; z-index: -2; }
-        .glow-wrapper::after { filter: blur(12px); opacity: 0.7; }
-        .glow-wrapper:hover::after { opacity: 1; filter: blur(16px); } 
-        .glow-inner { background: #FFF; border-radius: 16.5px; position: relative; z-index: 1; width: 100%; }
+
+        .glow-wrapper::before { 
+          content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+          border-radius: 18px; 
+          background: linear-gradient(45deg, var(--terracota), #e1c070, var(--terracota)); 
+          z-index: -2; 
+        }
+        .glow-wrapper::after { 
+          content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; 
+          border-radius: 20px; 
+          background: transparent; 
+          box-shadow: 0 0 15px rgba(192, 90, 70, 0.3); 
+          z-index: -2; 
+          transition: box-shadow 0.3s ease;
+        }
+        .glow-wrapper:hover::after { box-shadow: 0 0 25px rgba(192, 90, 70, 0.6); } 
+        .glow-inner { background: #FFF; border-radius: 16px; position: relative; z-index: 1; width: 100%; height: 100%; }
         .card-inner-flex { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
         .offer-card-inner { padding: clamp(24px, 5vw, 48px); display: grid; grid-template-columns: 1fr 1.5fr; gap: clamp(20px, 5vw, 40px); align-items: center; }
