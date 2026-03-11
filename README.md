@@ -2,7 +2,7 @@
 
 Uma aplicação web completa e sofisticada desenvolvida em **React.js** para a venda de quadros decorativos premium. O projeto atua como uma Landing Page de alta conversão acoplada a um mini E-commerce, possuindo um funil de vendas interativo e uma **Área Administrativa oculta** para gestão do catálogo.
 
-[➡️ Ver Projeto Online](https://https://react-canva-admin.vercel.app/) *(Substitua pelo link real do Vercel/Pages)*
+[➡️ Ver Projeto Online](https://react-canva-admin.vercel.app/) *(Substitua pelo link real do Vercel/Pages)*
 
 ---
 
